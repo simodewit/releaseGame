@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
 
     [Header("variables")]
     public string floorTag;
-    public float moveSpeed;
+    public float walkSpeed;
     public float runSpeed;
     public float sens;
     public float jumpForce;
@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
     RaycastHit hit;
 
     //privates
-    float normalSpeed;
+    float moveSpeed;
     bool timerEnabled;
     float timer;
 
@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
 
     public void Start()
     {
-        normalSpeed = moveSpeed;
+        moveSpeed = walkSpeed;
     }
 
     public void FixedUpdate()
@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.z = Input.GetAxis("Vertical");
 
-        rb.AddRelativeForce(input * moveSpeed, ForceMode.Impulse);
+        rb.AddRelativeForce(input * walkSpeed, ForceMode.Impulse);
     }
 
     public void Rotate()
@@ -93,13 +93,13 @@ public class Movement : MonoBehaviour
             {
                 timerEnabled = false;
                 timer = runRechargeInterval;
-                moveSpeed = runSpeed;
+                walkSpeed = runSpeed;
             }
         }
         else
         {
             timer -= Time.deltaTime;
-            moveSpeed = normalSpeed;
+            walkSpeed = moveSpeed;
 
             if (timer < 0)
             {

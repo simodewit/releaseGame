@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class PickupAndDrop : MonoBehaviour
 {
+    #region variables
+
+    [Header("variables")]
     public GameObject cam;
     public float distance;
     public Transform gunPosition;
 
+    //privates
     bool hasItem;
     GameObject gun;
     RaycastHit hit;
+
+    #endregion
+
+    #region update
 
     public void Update()
     {
         PickupAndDrops();
     }
+
+    #endregion
+
+    #region pickup and drop
 
     public void PickupAndDrops()
     {
@@ -39,4 +51,6 @@ public class PickupAndDrop : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }

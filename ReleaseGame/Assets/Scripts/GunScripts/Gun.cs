@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
     public int totalBurstShots;
     [Tooltip("The interval between bullets shot (not relevant to semi-automatic)")]
     public float shootInterval;
+    public bool isPickedUp;
 
     [Header("switch types")]
     [Tooltip("The ability for a player to change this gun into a different type of shooting")]
@@ -63,6 +64,11 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer -= Time.deltaTime;
+
+            if (!isPickedUp)
+            {
+                return;
+            }
 
             if (isReloading)
             {

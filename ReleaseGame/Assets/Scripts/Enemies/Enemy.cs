@@ -5,15 +5,27 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    #region variables
+
+    [Header("variables")]
     public Vector3 roamingRoom;
     public float safeDistance;
 
+    //privates
     NavMeshAgent agent;
+
+    #endregion
+
+    #region start
 
     public void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
+
+    #endregion
+
+    #region states
 
     public void Roaming(Vector3 room)
     {
@@ -27,6 +39,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region custom converters
 
     public float DistanceCalculation(Vector2 pos, Vector2 endPos)
     {
@@ -47,4 +62,6 @@ public class Enemy : MonoBehaviour
 
         return randomized;
     }
+
+    #endregion
 }

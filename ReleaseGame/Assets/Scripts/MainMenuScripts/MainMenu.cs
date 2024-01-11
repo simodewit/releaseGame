@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public GameObject playPanel;
     public GameObject quitGamePanel;
 
+    [Header("refrences to use")]
     public AudioSource buttonClickSound;
     public int sceneLoadIndex;
 
@@ -73,10 +74,6 @@ public class MainMenu : MonoBehaviour
         settingsPanel.SetActive(false);
         mainPanel.SetActive(true);
     }
-
-    #endregion
-
-    #region settings
 
     #endregion
 }
