@@ -338,8 +338,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3970933689357878875}
   serializedVersion: 4
-  m_Mass: 3
-  m_Drag: 2
+  m_Mass: 6
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -369,14 +369,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef79e8338822b674f900da8cec0d0312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorTag: Floor
   moveSpeed: 1
   runSpeed: 2
   sens: 5
-  jumpForce: 5
+  jumpForce: 20
   runRechargeSpeed: 0.3
   runDechargeSpeed: 0.5
   runRechargeInterval: 2
   lookClamp: 60
+  jumpCheckLength: 1.1
   rb: {fileID: 6139191616811187851}
   cam: {fileID: 8165379770682450812}
   sprintSlider: {fileID: 6328173926539101408}

@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     #region variables
 
     [Header("variables")]
+    public string floorTag;
     public float moveSpeed;
     public float runSpeed;
     public float sens;
@@ -20,14 +21,16 @@ public class Movement : MonoBehaviour
     public float runRechargeInterval;
     [Tooltip("clamps the looking of up and down between the normal and - value of this float")]
     public float lookClamp;
+    [Tooltip("This should be: playerHeight % 2 + 0.1. only change the height to something different if you know it has to be something different")]
+    public float jumpCheckLength;
 
     [Header("refrences")]
     public Rigidbody rb;
     public GameObject cam;
     public Slider sprintSlider;
+    RaycastHit hit;
 
     //privates
-    bool isGrounded;
     float normalSpeed;
     bool timerEnabled;
     float timer;
@@ -116,27 +119,19 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector3 jump = new Vector3(0, jumpForce, 0);
+            if (Physics.Raycast(transform.position, -transform.up, out hit, jumpCheckLength))
+            {
+                Debug.DrawRay(transform.position, -transform.up, Color.red, 10);
 
-            rb.AddForce(jump, ForceMode.Impulse);
-        }
-    }
+                if (hit.transform.tag == floorTag)
+                {
+                    Vector3 jump = new Vector3(0, jumpForce, 0);
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.material != null)
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.material != null)
-        {
-            isGrounded = false;
+                    rb.AddRelativeForce(jump, ForceMode.Impulse);
+                }
+            }
         }
     }
 
