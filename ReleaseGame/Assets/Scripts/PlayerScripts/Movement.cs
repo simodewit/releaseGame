@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
@@ -28,10 +29,11 @@ public class Movement : MonoBehaviour
     public Rigidbody rb;
     public GameObject cam;
     public Slider sprintSlider;
-    RaycastHit hit;
+    public bool inUI;
 
     //privates
-    float moveSpeed;
+    RaycastHit hit;
+    public float moveSpeed;
     bool timerEnabled;
     float timer;
 
@@ -67,11 +69,17 @@ public class Movement : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.z = Input.GetAxis("Vertical");
 
-        rb.AddRelativeForce(input * walkSpeed, ForceMode.Impulse);
+        input = transform.TransformDirection(input);
+        rb.MovePosition(transform.position + input * moveSpeed * Time.deltaTime);
     }
 
     public void Rotate()
     {
+        if (inUI)
+        {
+            return;
+        }
+
         Vector3 mouseInput = new Vector3();
 
         mouseInput.y = Input.GetAxis("Mouse X");
@@ -93,13 +101,17 @@ public class Movement : MonoBehaviour
             {
                 timerEnabled = false;
                 timer = runRechargeInterval;
-                walkSpeed = runSpeed;
+                moveSpeed = runSpeed;
+            }
+            else
+            {
+                moveSpeed = walkSpeed;
             }
         }
         else
         {
             timer -= Time.deltaTime;
-            walkSpeed = moveSpeed;
+            moveSpeed = walkSpeed;
 
             if (timer < 0)
             {
