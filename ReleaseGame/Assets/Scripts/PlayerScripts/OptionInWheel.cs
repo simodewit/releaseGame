@@ -1,22 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class OptionInWheel : MonoBehaviour
+public class OptionInWheel : MonoBehaviour , IPointerEnterHandler
 {
     public GameObject gunToInstantiate;
+    public OptionsWheel optionsWheel;
 
-    Button button;
-    
-    public void Start()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        button = GetComponent<Button>();
-    }
-
-    public void CheckIfSelected()
-    {
-        if (gunToInstantiate == null)
-        {
-            return;
-        }
+        Debug.Log("Mouse is over GameObject.");
+        optionsWheel.optionInWheel = this;
     }
 }

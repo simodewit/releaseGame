@@ -9,11 +9,12 @@ public class PickupAndDrop : MonoBehaviour
     [Header("variables")]
     public GameObject cam;
     public float distance;
-    public Transform gunPosition;
+    public Transform interactablePosition;
+    public string interactablesTag;
 
     //privates
     bool hasItem;
-    GameObject gun;
+    GameObject interactable;
     RaycastHit hit;
 
     #endregion
@@ -31,22 +32,22 @@ public class PickupAndDrop : MonoBehaviour
 
     public void PickupAndDrops()
     {
-        if (hasItem && Input.GetKeyDown(KeyCode.G))
+        if (hasItem && Input.GetKeyDown(KeyCode.X))
         {
-            gun.GetComponent<Rigidbody>().useGravity = true;
-            gun.transform.parent = null;
-            gun = null;
+            interactable.GetComponent<Rigidbody>().useGravity = true;
+            interactable.transform.parent = null;
+            interactable = null;
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance))
             {
-                if (hit.transform.GetComponent<Gun>() != null)
+                if (hit.transform.tag == interactablesTag)
                 {
-                    gun = hit.transform.gameObject;
-                    gun.GetComponent<Rigidbody>().useGravity = false;
-                    gun.transform.SetParent(cam.transform);
-                    gun.transform.localPosition = gunPosition.transform.localPosition;
+                    interactable = hit.transform.gameObject;
+                    interactable.GetComponent<Rigidbody>().useGravity = false;
+                    interactable.transform.SetParent(interactablePosition);
+                    interactable.transform.localPosition = Vector3.zero;
                 }
             }
         }

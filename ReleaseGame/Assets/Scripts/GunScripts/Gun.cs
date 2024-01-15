@@ -20,7 +20,6 @@ public class Gun : MonoBehaviour
     public int totalBurstShots;
     [Tooltip("The interval between bullets shot (not relevant to semi-automatic)")]
     public float shootInterval;
-    public bool isPickedUp;
 
     [Header("switch types")]
     [Tooltip("The ability for a player to change this gun into a different type of shooting")]
@@ -64,11 +63,6 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer -= Time.deltaTime;
-
-            if (!isPickedUp)
-            {
-                return;
-            }
 
             if (isReloading)
             {
@@ -157,7 +151,7 @@ public class Gun : MonoBehaviour
     public void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, endOfBarrel.position, Quaternion.identity);
-        bullet.transform.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed);
+        bullet.transform.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
         currentAmmo -= 1;
     }
 

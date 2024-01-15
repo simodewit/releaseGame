@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 508715896347966402}
   - component: {fileID: 3984959247810493877}
   - component: {fileID: 7478060614426291091}
+  - component: {fileID: 6440108196408371503}
   m_Layer: 0
   m_Name: Option G
   m_TagString: Untagged
@@ -121,6 +122,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6440108196408371503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114253137765809876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &286333984589365939
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +503,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2049778576174829441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6753409851851100433}
+  m_Layer: 0
+  m_Name: GunPlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6753409851851100433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049778576174829441}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.358, y: -0.241, z: 0.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3157473418217952527}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3204495589714803312
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +680,7 @@ GameObject:
   - component: {fileID: 1345534304063277616}
   - component: {fileID: 694843267747789516}
   - component: {fileID: 3788548561059309247}
+  - component: {fileID: 7108220993688779775}
   m_Layer: 0
   m_Name: Option H
   m_TagString: Untagged
@@ -743,6 +790,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7108220993688779775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332940235565290436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &3628481160870398897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,6 +1530,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsWheel: {fileID: 438063385893090806}
   movementScript: {fileID: 2496906981581151541}
+  placeToInstantiate: {fileID: 6753409851851100433}
+  options: []
+  optionInWheel: {fileID: 0}
 --- !u!1 &5697182276962853150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1545,7 @@ GameObject:
   - component: {fileID: 4466304047453058094}
   - component: {fileID: 6705792303965456413}
   - component: {fileID: 3533998191332622314}
+  - component: {fileID: 4267659778198830549}
   m_Layer: 0
   m_Name: Option C
   m_TagString: Untagged
@@ -1590,6 +1655,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4267659778198830549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697182276962853150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &5859207550017547695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2067,7 @@ GameObject:
   - component: {fileID: 4489969917944438893}
   - component: {fileID: 4536433811906387170}
   - component: {fileID: 1428727778618524039}
+  - component: {fileID: 3380952098045249410}
   m_Layer: 0
   m_Name: Option D
   m_TagString: Untagged
@@ -2097,6 +2177,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3380952098045249410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372167578199970327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &6443528405757729966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2203,7 @@ GameObject:
   - component: {fileID: 5418722197227175812}
   - component: {fileID: 1160549808578377431}
   - component: {fileID: 4525671576896827856}
+  - component: {fileID: 6015182691555728038}
   m_Layer: 0
   m_Name: Option E
   m_TagString: Untagged
@@ -2218,6 +2313,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6015182691555728038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443528405757729966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &7330801424239029439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2339,7 @@ GameObject:
   - component: {fileID: 463346097326125748}
   - component: {fileID: 8574216278811494869}
   - component: {fileID: 8242012866110518690}
+  - component: {fileID: 4010736588209331085}
   m_Layer: 0
   m_Name: Option F
   m_TagString: Untagged
@@ -2339,6 +2449,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4010736588209331085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330801424239029439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 0}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &8165379770682450812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2494,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6753409851851100433}
   m_Father: {fileID: 7750879253950779688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3691150585374762814
@@ -2488,6 +2613,7 @@ GameObject:
   - component: {fileID: 7856642085004011819}
   - component: {fileID: 6349102245000386847}
   - component: {fileID: 9040562371764743200}
+  - component: {fileID: 1767506248075171564}
   m_Layer: 0
   m_Name: Option B
   m_TagString: Untagged
@@ -2597,6 +2723,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1767506248075171564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520315389262481332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 8789354464060253603, guid: 6d6a9ea4e3609cb4494854e5d9a60977,
+    type: 3}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &8733063625591043958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,6 +2786,7 @@ GameObject:
   - component: {fileID: 4855952205125618227}
   - component: {fileID: 5651526053232144802}
   - component: {fileID: 4939553728364561217}
+  - component: {fileID: 980102975338173236}
   m_Layer: 0
   m_Name: Option A
   m_TagString: Untagged
@@ -2754,6 +2896,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &980102975338173236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002993944463385935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26522f3cfc7bdfa438ebcb7751313681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunToInstantiate: {fileID: 8789354464060253603, guid: 8ac4116b2e4035a418a86de08580dcc9,
+    type: 3}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &9186220966258836035
 GameObject:
   m_ObjectHideFlags: 0
