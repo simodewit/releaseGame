@@ -17,7 +17,7 @@ public class Vehicle : MonoBehaviour
     public WheelCollider colliderRR;
 
     [Header("Variables")]
-    [Tooltip("The maximum amount of turning that the wheels can turn")]
+    [Range(0, 90)][Tooltip("The maximum amount of turning that the wheels can turn")]
     public float maxTurning = 15;
     [Tooltip("The speed at witch the car turns")]
     public float turningStrength = 1;
@@ -27,9 +27,12 @@ public class Vehicle : MonoBehaviour
     public float accelerationSpeed = 1;
     [Range(0, 2)][Tooltip("The balance of the power output between the front and back wheels (1 = awd, 0 = rwd, 2 = fwd)")]
     public float torqueBalance = 1;
+    [Tooltip("Place for the driver to sit")]
+    public Transform driverPlace;
 
     //privates
     float turning;
+    bool drives;
 
     #endregion
 
@@ -37,6 +40,11 @@ public class Vehicle : MonoBehaviour
 
     public void Update()
     {
+        if (!drives)
+        {
+            return;
+        }
+
         Speed();
         Braking();
         Rotation();
@@ -50,6 +58,11 @@ public class Vehicle : MonoBehaviour
     {
         float input = Input.GetAxis("Vertical");
 
+        if (input <= 0)
+        {
+            input = 0;
+        }
+
         colliderLF.motorTorque = input * Time.deltaTime;
         colliderRF.motorTorque = input * Time.deltaTime;
         colliderLR.motorTorque = input * Time.deltaTime;
@@ -58,7 +71,17 @@ public class Vehicle : MonoBehaviour
 
     public void Braking()
     {
+        float input = Input.GetAxis("Vertical");
 
+        if (input >= 0)
+        {
+            input = 0;
+        }
+
+        colliderLF.brakeTorque = input * Time.deltaTime;
+        colliderRF.brakeTorque = input * Time.deltaTime;
+        colliderLR.brakeTorque = input * Time.deltaTime;
+        colliderRR.brakeTorque = input * Time.deltaTime;
     }
 
     public void Rotation()
@@ -68,8 +91,8 @@ public class Vehicle : MonoBehaviour
 
         Mathf.Clamp(turning, -maxTurning, maxTurning);
 
-        colliderLF.transform.Rotate(0, turning, 0);
-        colliderRF.transform.Rotate(0, turning, 0);
+        colliderLF.gameObject.transform.Rotate(0, turning, 0);
+        colliderRF.gameObject.transform.Rotate(0, turning, 0);
     }
 
     #endregion

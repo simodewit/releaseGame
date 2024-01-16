@@ -30,10 +30,11 @@ public class Movement : MonoBehaviour
     public GameObject cam;
     public Slider sprintSlider;
     public bool inUI;
+    public bool canMove;
 
     //privates
+    float moveSpeed;
     RaycastHit hit;
-    public float moveSpeed;
     bool timerEnabled;
     float timer;
 
@@ -64,6 +65,11 @@ public class Movement : MonoBehaviour
 
     public void Move()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         Vector3 input = new Vector3();
 
         input.x = Input.GetAxis("Horizontal");
@@ -93,6 +99,11 @@ public class Movement : MonoBehaviour
 
     public void Running()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             sprintSlider.value -= runDechargeSpeed * Time.deltaTime;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5322507888767565024}
   - component: {fileID: 6830234702828505879}
-  - component: {fileID: -9038676023777263503}
+  - component: {fileID: 2022726704695516989}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -45,7 +45,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3220733496826855038}
   serializedVersion: 4
-  m_Mass: 2000
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -64,27 +64,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-9038676023777263503
-MonoBehaviour:
+--- !u!65 &2022726704695516989
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3220733496826855038}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c29d4b1096c3a8439b82a1ac87c2651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderLF: {fileID: 0}
-  colliderRF: {fileID: 0}
-  colliderLR: {fileID: 0}
-  colliderRR: {fileID: 0}
-  maxTurning: 0
-  turningStrength: 0
-  topSpeed: 0
-  accelerationSpeed: 0
-  torqueBalance: 1.52
+  serializedVersion: 3
+  m_Size: {x: 6.5, y: 0.64, z: 8.24}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4086397527098111585
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 131784202397381993}
   - component: {fileID: 4905191520208563223}
   - component: {fileID: 4397745634775317334}
-  - component: {fileID: 7805163653176164876}
+  - component: {fileID: 712886538191250417}
   m_Layer: 0
   m_Name: Wheel RF
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 2, y: 0, z: 3}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322507888767565024}
@@ -169,7 +169,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!146 &7805163653176164876
+--- !u!146 &712886538191250417
 WheelCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +178,7 @@ WheelCollider:
   m_GameObject: {fileID: 4086397527098111585}
   serializedVersion: 2
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 2.64
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 773146095446187910}
   - component: {fileID: 6080029752807858029}
   - component: {fileID: 7142305172135747652}
-  - component: {fileID: 5674873672068398771}
+  - component: {fileID: 6144678384271497241}
   m_Layer: 0
   m_Name: Wheel RR
   m_TagString: Untagged
@@ -237,7 +237,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 2, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322507888767565024}
@@ -292,7 +292,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!146 &5674873672068398771
+--- !u!146 &6144678384271497241
 WheelCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,7 +301,7 @@ WheelCollider:
   m_GameObject: {fileID: 5412689989151299864}
   serializedVersion: 2
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 2.64
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6204646004324279492}
   - component: {fileID: 4827469961160058506}
   - component: {fileID: 3626285432505072529}
-  - component: {fileID: 2065111862606635677}
+  - component: {fileID: 7906656525681341397}
   m_Layer: 0
   m_Name: Wheel LR
   m_TagString: Untagged
@@ -360,7 +360,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2, y: -0, z: -3}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322507888767565024}
@@ -415,7 +415,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!146 &2065111862606635677
+--- !u!146 &7906656525681341397
 WheelCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,7 +424,7 @@ WheelCollider:
   m_GameObject: {fileID: 6334068386648067299}
   serializedVersion: 2
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 2.64
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 5462679332584863564}
   - component: {fileID: 5917604536845572915}
   - component: {fileID: 8830172553463125013}
-  - component: {fileID: 7276995005014874673}
+  - component: {fileID: 1758919195906678464}
   m_Layer: 0
   m_Name: Wheel LF
   m_TagString: Untagged
@@ -483,7 +483,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2, y: -0, z: 3}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322507888767565024}
@@ -538,7 +538,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!146 &7276995005014874673
+--- !u!146 &1758919195906678464
 WheelCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -547,7 +547,7 @@ WheelCollider:
   m_GameObject: {fileID: 8154319042129524662}
   serializedVersion: 2
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 2.64
+  m_Radius: 0.5
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
