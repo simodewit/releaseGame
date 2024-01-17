@@ -24,6 +24,7 @@ public class EnterVehicle : MonoBehaviour
     {
         if (isDriving)
         {
+            transform.rotation = hit.transform.rotation;
             transform.localPosition = Vector3.zero;
             panelFIcon.SetActive(false);
 
@@ -37,7 +38,7 @@ public class EnterVehicle : MonoBehaviour
                 movementScript.transform.parent = null;
                 movementScript.transform.position += leaveOffset;
 
-                hit.transform.GetComponent<Vehicle>().drives = false;
+                hit.transform.GetComponent<Vehicle>().driving = false;
             }
         }
         else
@@ -63,8 +64,9 @@ public class EnterVehicle : MonoBehaviour
                     movementScript.canMove = false;
                     transform.parent = hit.transform.GetComponent<Vehicle>().driverPlace;
                     transform.forward = hit.transform.forward;
-                    
-                    hit.transform.GetComponent<Vehicle>().drives = true;
+
+                    cam.transform.rotation = Quaternion.identity;
+                    hit.transform.GetComponent<Vehicle>().driving = true;
                 }
             }
             else

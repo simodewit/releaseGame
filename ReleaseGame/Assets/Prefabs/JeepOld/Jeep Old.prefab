@@ -434,17 +434,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.4690895
+      value: 6.4613276
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.006414
+      value: 9.077543
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
         type: 3}
@@ -733,15 +733,16 @@ MonoBehaviour:
   meshRF: {fileID: 3701008586984433330}
   meshLR: {fileID: 790139399611559237}
   meshRR: {fileID: 8918575852854934801}
-  maxTurning: 5
-  turningStrength: 1
-  snapBackStrength: 1
-  topSpeed: 100
-  accelerationSpeed: 1
-  deccelerationSpeed: 1
+  maxTurning: 15
+  turningStrength: 30
+  snapBackStrength: 50
+  topSpeed: 50
+  accelerationSpeed: 100
+  brakeForce: 100
   torqueBalance: 1
   driverPlace: {fileID: 4608376487168282734}
-  drives: 0
+  driving: 0
+  rb: {fileID: 8202971540326206740}
 --- !u!1 &8918575852854934801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3229768999403964062, guid: d2e98fcc1a2a2d44f97906f6992ccb34,

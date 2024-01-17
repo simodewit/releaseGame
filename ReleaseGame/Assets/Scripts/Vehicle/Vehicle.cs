@@ -37,17 +37,36 @@ public class Vehicle : MonoBehaviour
     public float topSpeed = 100;
     [Tooltip("The speed at witch the car accelerates")]
     public float accelerationSpeed = 1;
+    [Tooltip("The speed at witch the car accelerates backwards")]
+    public float rearAccelerationSpeed = 1;
     [Tooltip("The speed at witch the car deccelerates")]
-    public float deccelerationSpeed = 1;
-    [Range(0, 2)][Tooltip("The balance of the power output between the front and back wheels (1 = awd, 0 = rwd, 2 = fwd)")]
-    public float torqueBalance = 1;
+    public float brakeForce = 1;
+    [Tooltip("The balance of the power output between the front and back wheels")]
+    public torqueBalance balanceOfTorque;
+    [Tooltip("The balance of the brakes")]
+    public brakeBalance balanceOfBrakes;
     [Tooltip("Place for the driver to sit")]
     public Transform driverPlace;
     [Tooltip("If true the car is driven")]
-    public bool drives;
+    public bool driving;
+    public Rigidbody rb;
 
     //privates
     float turning;
+
+    public enum torqueBalance
+    {
+        RearWheelDrive,
+        AllWheelDrive,
+        FrontWheelDrive
+    }
+
+    public enum brakeBalance
+    {
+        RearWheels,
+        AllWheels,
+        FrontWheels
+    }
 
     #endregion
 
@@ -55,6 +74,12 @@ public class Vehicle : MonoBehaviour
 
     public void Update()
     {
+        if (!driving)
+        {
+            return;
+        }
+
+        Driving();
         Turning();
     }
 
@@ -62,9 +87,59 @@ public class Vehicle : MonoBehaviour
 
     #region driving
 
+    public void Driving()
+    {
+        float drivingInput = Input.GetAxis("Vertical");
+
+        if (drivingInput > 0)
+        {
+            if (balanceOfTorque == torqueBalance.FrontWheelDrive)
+            {
+                colliderLF.motorTorque = drivingInput * accelerationSpeed;
+                colliderRF.motorTorque = drivingInput * accelerationSpeed;
+            }
+            if (balanceOfTorque == torqueBalance.AllWheelDrive)
+            {
+                colliderLF.motorTorque = drivingInput * accelerationSpeed * .5f;
+                colliderRF.motorTorque = drivingInput * accelerationSpeed * .5f;
+                colliderLR.motorTorque = drivingInput * accelerationSpeed * .5f;
+                colliderRR.motorTorque = drivingInput * accelerationSpeed * .5f;
+            }
+            if (balanceOfTorque == torqueBalance.RearWheelDrive)
+            {
+                colliderLR.motorTorque = drivingInput * accelerationSpeed;
+                colliderRR.motorTorque = drivingInput * accelerationSpeed;
+            }
+        }
+        if (drivingInput < 0)
+        {
+            if (balanceOfTorque == torqueBalance.FrontWheelDrive)
+            {
+                colliderLF.motorTorque = drivingInput * rearAccelerationSpeed;
+                colliderRF.motorTorque = drivingInput * rearAccelerationSpeed;
+            }
+            if (balanceOfTorque == torqueBalance.AllWheelDrive)
+            {
+                colliderLF.motorTorque = drivingInput * rearAccelerationSpeed * .5f;
+                colliderRF.motorTorque = drivingInput * rearAccelerationSpeed * .5f;
+                colliderLR.motorTorque = drivingInput * rearAccelerationSpeed * .5f;
+                colliderRR.motorTorque = drivingInput * rearAccelerationSpeed * .5f;
+            }
+            if (balanceOfTorque == torqueBalance.RearWheelDrive)
+            {
+                colliderLR.motorTorque = drivingInput * rearAccelerationSpeed;
+                colliderRR.motorTorque = drivingInput * rearAccelerationSpeed;
+            }
+        }
+    }
+
+    #endregion
+
+    #region turning
+
     public void Turning()
     {
-        if (!drives)
+        if (!driving)
         {
             return;
         }
