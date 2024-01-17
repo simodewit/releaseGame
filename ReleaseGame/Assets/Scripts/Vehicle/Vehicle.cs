@@ -16,23 +16,38 @@ public class Vehicle : MonoBehaviour
     [Tooltip("Right rear wheel collider")]
     public WheelCollider colliderRR;
 
+    [Header("Wheel mesh refrences")]
+    [Tooltip("Left front wheel mesh")]
+    public GameObject meshLF;
+    [Tooltip("Right front wheel mesh")]
+    public GameObject meshRF;
+    [Tooltip("Left rear wheel mesh")]
+    public GameObject meshLR;
+    [Tooltip("Right rear wheel mesh")]
+    public GameObject meshRR;
+
     [Header("Variables")]
     [Range(0, 90)][Tooltip("The maximum amount of turning that the wheels can turn")]
-    public float maxTurning = 15;
+    public float maxTurning = 5;
     [Tooltip("The speed at witch the car turns")]
     public float turningStrength = 1;
+    [Tooltip("the strength of snapping back to driving straight")]
+    public float snapBackStrength = 1;
     [Tooltip("The maximum speed at witch the car can travel")]
     public float topSpeed = 100;
     [Tooltip("The speed at witch the car accelerates")]
     public float accelerationSpeed = 1;
+    [Tooltip("The speed at witch the car deccelerates")]
+    public float deccelerationSpeed = 1;
     [Range(0, 2)][Tooltip("The balance of the power output between the front and back wheels (1 = awd, 0 = rwd, 2 = fwd)")]
     public float torqueBalance = 1;
     [Tooltip("Place for the driver to sit")]
     public Transform driverPlace;
+    [Tooltip("If true the car is driven")]
+    public bool drives;
 
     //privates
     float turning;
-    bool drives;
 
     #endregion
 
@@ -40,59 +55,44 @@ public class Vehicle : MonoBehaviour
 
     public void Update()
     {
+        Turning();
+    }
+
+    #endregion
+
+    #region driving
+
+    public void Turning()
+    {
         if (!drives)
         {
             return;
         }
 
-        Speed();
-        Braking();
-        Rotation();
-    }
-
-    #endregion
-
-    #region code
-
-    public void Speed()
-    {
-        float input = Input.GetAxis("Vertical");
-
-        if (input <= 0)
+        if (Input.GetAxis("Horizontal") != 0)
         {
-            input = 0;
+            float steeringInput = Input.GetAxis("Horizontal");
+            turning += steeringInput * turningStrength * Time.deltaTime;
+
+            turning = Mathf.Clamp(turning, -maxTurning, maxTurning);
+        }
+        else
+        {
+            if (turning > 0)
+            {
+                turning -= snapBackStrength * Time.deltaTime;
+            }
+            else
+            {
+                turning += snapBackStrength * Time.deltaTime;
+            }
         }
 
-        colliderLF.motorTorque = input * Time.deltaTime;
-        colliderRF.motorTorque = input * Time.deltaTime;
-        colliderLR.motorTorque = input * Time.deltaTime;
-        colliderRR.motorTorque = input * Time.deltaTime;
-    }
+        colliderLF.steerAngle = turning;
+        colliderRF.steerAngle = turning;
 
-    public void Braking()
-    {
-        float input = Input.GetAxis("Vertical");
-
-        if (input >= 0)
-        {
-            input = 0;
-        }
-
-        colliderLF.brakeTorque = input * Time.deltaTime;
-        colliderRF.brakeTorque = input * Time.deltaTime;
-        colliderLR.brakeTorque = input * Time.deltaTime;
-        colliderRR.brakeTorque = input * Time.deltaTime;
-    }
-
-    public void Rotation()
-    {
-        float input = Input.GetAxis("Horizontal");
-        turning += input * turningStrength * Time.deltaTime;
-
-        Mathf.Clamp(turning, -maxTurning, maxTurning);
-
-        colliderLF.gameObject.transform.Rotate(0, turning, 0);
-        colliderRF.gameObject.transform.Rotate(0, turning, 0);
+        meshLF.transform.rotation = new Quaternion(0, turning, 0, 0);
+        meshRF.transform.rotation = new Quaternion(0, turning, 0, 0);
     }
 
     #endregion

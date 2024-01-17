@@ -9,7 +9,6 @@ public class OptionInWheel : MonoBehaviour , IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        Debug.Log("Mouse is over GameObject.");
         optionsWheel.optionInWheel = this;
     }
 }
