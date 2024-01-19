@@ -1045,7 +1045,7 @@ MonoBehaviour:
   walkSpeed: 2
   runSpeed: 5
   sens: 10
-  jumpForce: 3
+  jumpForce: 5
   runRechargeSpeed: 0.3
   runDechargeSpeed: 0.3
   runRechargeInterval: 1
@@ -1064,7 +1064,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3970933689357878875}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1118,10 +1118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a168f4ef2c4da14a81b1ca39dfe9f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 8165379770682450812}
-  range: 5
-  movementScript: {fileID: 2496906981581151541}
   leaveOffset: {x: 0, y: 0, z: 0}
+  range: 5
+  cam: {fileID: 8165379770682450812}
+  movementScript: {fileID: 2496906981581151541}
   rb: {fileID: 2646393661589521041}
   col: {fileID: 3100113786957427017}
   panelFIcon: {fileID: 3208242482038003860}

@@ -152,7 +152,7 @@ public class Movement : MonoBehaviour
                 {
                     Vector3 jump = new Vector3(0, jumpForce, 0);
 
-                    rb.AddRelativeForce(jump, ForceMode.Impulse);
+                    rb.AddRelativeForce(jump, ForceMode.VelocityChange);
                 }
             }
         }
