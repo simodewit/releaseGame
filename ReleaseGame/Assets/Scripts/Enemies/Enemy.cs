@@ -3,64 +3,242 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class AIScript : MonoBehaviour
 {
     #region variables
 
-    [Header("variables")]
-    public Vector3 roamingRoom;
-    public float safeDistance;
+    [Header("NPC standard things")]
+    public float carefullWalkSpeed;
+    public float normalWalkSpeed;
+    public float runSpeed;
 
-    //privates
-    NavMeshAgent agent;
+    [Header("Gun specific code")]
+    public float gunBloom;
+    public float damagePerShot;
+
+    [Header("'Map info")]
+    public Transform mapCentre;
+    public float mapRadius;
+    public Transform[] importantPlaces;
+
+    [Header("Line of sight info")]
+    public float maxDistance;
+    public float totalDegrees;
+    public float closeDistance;
+    public float timeToSeek;
+
+    [Header("Player info")]
+    public string playerTag;
+
+    //private variables
+    NavMeshAgent navMesh;
+    RaycastHit hit;
+
+    //player find stuf
+    List<GameObject> players = new List<GameObject>();
+    Vector3 lastSeen;
+
+    //timer
+    float timerForFindingPlayer;
+
+    //dodge variables
+    Vector3 walkPlace;
 
     #endregion
 
-    #region start
+    #region start, update and other basic functions
 
     public void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        navMesh = GetComponent<NavMeshAgent>();
+    }
+
+    public void FixedUpdate()
+    {
+        TheBrain();
     }
 
     #endregion
 
-    #region states
+    #region the fucntion that decides everything
 
-    public void Roaming(Vector3 room)
+    public void TheBrain()
     {
-        float distance = DistanceCalculation(new Vector2(transform.position.x, transform.position.z), new Vector2(room.x, room.z));
 
-        if (distance <= safeDistance)
+    }
+
+    #endregion
+
+    #region main functions that get all the info
+
+    /// <summary> finds all players inside of detection </summary>
+    public void FindPlayers(List<GameObject> outPlayers, string playerTag, float maxDistance, float maxRotation, float closestDistance)
+    {
+        GameObject[] playerArray = GameObject.FindGameObjectsWithTag(playerTag);
+
+        foreach (var player in playerArray)
         {
-            Vector3 location = Randomize(-room, room);
+            float angle = Vector3.Angle(transform.forward, player.transform.position);
+            float distance = Vector3.Distance(transform.position, player.transform.position);
 
-            agent.destination = location;
+            if (angle < maxRotation && distance < maxDistance)
+            {
+                outPlayers.Add(player);
+            }
+            else if (distance < closestDistance)
+            {
+                outPlayers.Add(player);
+            }
         }
     }
 
-    #endregion
-
-    #region custom converters
-
-    public float DistanceCalculation(Vector2 pos, Vector2 endPos)
+    /// <summary> finds closest player inside of detection  </summary>
+    public void FindClosestPlayer(GameObject player, string playerTag, float maxDistance, float maxRotation, float closestDistance)
     {
-        float distance;
+        GameObject[] playerArray = GameObject.FindGameObjectsWithTag(playerTag);
+        float nearestPlayerDistance = new float();
+        GameObject nearestPlayer = new GameObject();
 
-        distance = (pos.x - endPos.x) + (pos.y - endPos.y);
+        foreach (var p in playerArray)
+        {
+            float angle = Vector3.Angle(transform.forward, p.transform.position);
+            float distance = Vector3.Distance(transform.position, p.transform.position);
 
-        return distance;
+            if (angle < maxRotation && distance < maxDistance && nearestPlayerDistance > distance)
+            {
+                nearestPlayer = p;
+                nearestPlayerDistance = distance;
+            }
+            else if (distance < closestDistance && nearestPlayerDistance > distance)
+            {
+                nearestPlayer = p;
+                nearestPlayerDistance = distance;
+            }
+        }
+
+        player = nearestPlayer;
     }
 
-    public Vector3 Randomize(Vector3 minValues, Vector3 maxValues)
+    /// <summary> finds all players inside of the scene </summary>
+    public void FindAllPlayers(GameObject[] playerArray, List<GameObject> playerList)
     {
-        Vector3 randomized;
+        GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
+        playerArray = players;
 
-        randomized.x = Random.Range(minValues.x, maxValues.x);
-        randomized.y = Random.Range(minValues.y, maxValues.y);
-        randomized.z = Random.Range(minValues.z, maxValues.z);
+        foreach (var player in players)
+        {
+            playerList.Add(player.gameObject);
+        }
+    }
 
-        return randomized;
+    /// <summary> find the closest player to the NPC </summary>
+    public void FindNearestPlayer(GameObject player)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
+        float nearestPlayerDistance = new float();
+        GameObject nearestPlayer = new GameObject();
+
+        foreach (var p in players)
+        {
+            float distance = Vector3.Distance(transform.position, p.transform.position);
+
+            if (nearestPlayerDistance > distance)
+            {
+                nearestPlayer = p;
+                nearestPlayerDistance = distance;
+            }
+        }
+
+        player = nearestPlayer;
+    }
+
+    /// <summary> calculates the distances between you and all players given and returns 1 player that is the closest </summary>
+    public void CalculateDistanceToPlayers(List<GameObject> playersInList, GameObject returnsNearestPlayer, float returnsNearestPlayerDistance)
+    {
+        GameObject nearestPlayer = new GameObject();
+        float nearestPlayerDistance = new float();
+
+        if (playersInList.Count != 0)
+        {
+            foreach (var player in playersInList)
+            {
+                float distance = Vector3.Distance(transform.position, player.transform.position);
+
+                if (nearestPlayerDistance > distance)
+                {
+                    nearestPlayerDistance = distance;
+                    nearestPlayer = player;
+                }
+            }
+        }
+
+        returnsNearestPlayer = nearestPlayer;
+        returnsNearestPlayerDistance = nearestPlayerDistance;
+    }
+
+    #endregion
+
+    #region states for the NPC to do/use
+
+
+    /// <summary> takes a random place on the x and z axis of the map that the NPC is going to walk to </summary>
+    public void Roaming(NavMeshAgent agent, Transform centreOfMap, float radius, float moveSpeed)
+    {
+        Vector3 offset = new Vector3();
+
+        offset.x = Random.Range(-radius, radius) + centreOfMap.position.x;
+        offset.z = Random.Range(-radius, radius) + centreOfMap.position.z;
+
+        agent.destination = offset;
+        agent.speed = moveSpeed;
+    }
+
+    /// <summary> shoots towards the player with bloom </summary>
+    public void Shooting(Transform player, float maxBloom)
+    {
+        Vector3 bloom;
+        bloom.x = Random.Range(-player.position.z * 2 * maxBloom, player.position.z * 2 * maxBloom);
+        bloom.z = Random.Range(-player.position.z * 2 * maxBloom, player.position.z * 2 * maxBloom);
+        bloom.y = Random.Range(-player.position.z * maxBloom, player.position.y * maxBloom);
+
+        if (Physics.Raycast(transform.position, bloom, out hit))
+        {
+            if (hit.transform.GetComponent<HealthScript>())
+            {
+                hit.transform.GetComponent<HealthScript>().Health((int)damagePerShot);
+            }
+        }
+    }
+
+    /// <summary> let the NPC walk or run towards a position </summary>
+    public void Move(Vector3 placeToWalk, NavMeshAgent agent, float speed)
+    {
+        agent.destination = placeToWalk;
+        agent.speed = speed;
+    }
+
+    /// <summary> moving towards cover to hide behind </summary>
+    public void Dodge(float radiusToLook, Vector3 placeToDodgeFrom)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radiusToLook);
+        float shortestDistance = float.PositiveInfinity;
+        GameObject nearestGameobject = new GameObject();
+
+        if (colliders.Length > 0)
+        {
+            foreach (Collider collider in colliders)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestGameobject = collider.gameObject;
+                }
+            }
+
+            
+        }
     }
 
     #endregion
