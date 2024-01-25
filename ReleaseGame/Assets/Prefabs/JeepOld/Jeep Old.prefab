@@ -711,8 +711,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 2.5, z: 5.3}
-  m_Center: {x: 0, y: 0, z: 0.3}
+  m_Size: {x: 3.5, y: 1.45, z: 5.3}
+  m_Center: {x: 0, y: 0.3, z: 0.3}
 --- !u!114 &2054051770979578501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,14 +739,14 @@ MonoBehaviour:
   seat3: {fileID: 7528770205371358626}
   seat4: {fileID: 3754863373878863945}
   rb: {fileID: 8202971540326206740}
-  maxTurning: 15
+  maxTurning: 20
   turningStrength: 30
   snapBackStrength: 50
   topSpeed: 50
   accelerationSpeed: 1000
   rearAccelerationSpeed: 500
   brakeForce: 10000
-  balanceOfTorque: 1
+  balanceOfTorque: 0
   balanceOfBrakes: 1
 --- !u!1 &8918575852854934801 stripped
 GameObject:

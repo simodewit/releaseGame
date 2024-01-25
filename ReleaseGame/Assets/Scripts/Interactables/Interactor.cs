@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public enum states
@@ -18,6 +17,8 @@ public class Interactor : MonoBehaviour
     [Header("Variables")]
     [Tooltip("The range that the interactor will check for a interactable")]
     public float range;
+    [Tooltip("The speed the cam lerps into a shop")]
+    public float lerpSpeed;
 
     [Header("Refrences")]
     public Rigidbody rb;
@@ -27,11 +28,13 @@ public class Interactor : MonoBehaviour
     [Tooltip("The place to hold items")]
     public Transform holdPlace;
     public OptionsWheel optionsWheel;
+    public GameObject shopPanel;
 
     //private variables
     states state;
     RaycastHit hit;
     GameObject lastInteractable;
+    bool lerping;
 
     #endregion
 
@@ -81,6 +84,9 @@ public class Interactor : MonoBehaviour
         }
         else if (state == states.carrying)
         {
+            lastInteractable.transform.localPosition = Vector3.zero;
+            lastInteractable.transform.localRotation = Quaternion.identity;
+
             if (!Input.GetKeyDown(KeyCode.F))
             {
                 return;
@@ -95,7 +101,7 @@ public class Interactor : MonoBehaviour
                 return;
             }
 
-            //exit shop code
+            ExitShop(lastInteractable.GetComponent<Shop>());
         }
     }
 
@@ -120,7 +126,7 @@ public class Interactor : MonoBehaviour
                     EnterCar(hit.transform.GetComponent<Vehicle>());
                     break;
                 case type.shop:
-                    //shop enter code
+                    EnterShop(hit.transform.GetComponent<Shop>());
                     break;
                 case type.item:
                     Pickup(hit.transform);
@@ -174,6 +180,7 @@ public class Interactor : MonoBehaviour
         item.GetComponent<Rigidbody>().useGravity = false;
 
         state = states.carrying;
+        lastInteractable = item.gameObject;
     }
 
     public void Drop(Transform item)
@@ -184,6 +191,27 @@ public class Interactor : MonoBehaviour
         item.GetComponent<Rigidbody>().useGravity = true;
 
         state = states.notInteracting;
+        lastInteractable = null;
+    }
+
+    #endregion
+
+    #region Shop
+
+    public void EnterShop(Shop shop)
+    {
+        movementScript.enabled = false;
+        cam.transform.parent = null;
+
+        shop.panel.SetActive(true);
+    }
+
+    public void ExitShop(Shop shop)
+    {
+        movementScript.enabled = true;
+        cam.transform.parent = transform;
+
+        shop.panel.SetActive(false);
     }
 
     #endregion

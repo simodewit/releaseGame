@@ -84,6 +84,7 @@ public class Vehicle : Interactable
     {
         Driving();
         Turning();
+        FixRotations();
     }
 
     #endregion
@@ -142,7 +143,7 @@ public class Vehicle : Interactable
 
     public void Turning()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             float steeringInput = Input.GetAxis("Horizontal");
             turning += steeringInput * turningStrength * Time.deltaTime;
@@ -163,9 +164,18 @@ public class Vehicle : Interactable
 
         colliderLF.steerAngle = turning;
         colliderRF.steerAngle = turning;
+    }
 
-        meshLF.transform.rotation = new Quaternion(0, turning, 0, 0);
-        meshRF.transform.rotation = new Quaternion(0, turning, 0, 0);
+    #endregion
+
+    #region tyreRotations
+
+    public void FixRotations()
+    {
+        meshLF.transform.localRotation = Quaternion.Euler(colliderLF.rpm * Time.deltaTime, turning, 0);
+        meshRF.transform.localRotation = Quaternion.Euler(colliderRF.rpm * Time.deltaTime, turning, 0);
+        meshLR.transform.localRotation = Quaternion.Euler(colliderLR.rpm * Time.deltaTime, 0, 0);
+        meshRR.transform.localRotation = Quaternion.Euler(colliderRR.rpm * Time.deltaTime, 0, 0);
     }
 
     #endregion
