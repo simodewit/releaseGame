@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour
     public GameObject cam;
     public Slider sprintSlider;
     public bool inUI;
-    public bool canMove;
 
     //privates
     float moveSpeed;
@@ -49,22 +48,12 @@ public class Movement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (!canMove)
-        {
-            return;
-        }
-
         Move();
         Rotate();
     }
 
     public void Update()
     {
-        if (!canMove)
-        {
-            return;
-        }
-
         Jump();
         Running();
     }

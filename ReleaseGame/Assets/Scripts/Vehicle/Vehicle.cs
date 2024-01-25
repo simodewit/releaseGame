@@ -26,6 +26,19 @@ public class Vehicle : MonoBehaviour
     [Tooltip("Right rear wheel mesh")]
     public GameObject meshRR;
 
+    [Header("Seating positions")]
+    [Tooltip("Place for the driver to sit")]
+    public Transform seat1;
+    [Tooltip("Place for the 2nd person to sit")]
+    public Transform seat2;
+    [Tooltip("Place for the 3rd person to sit")]
+    public Transform seat3;
+    [Tooltip("Place for the 4th person to sit")]
+    public Transform seat4;
+
+    [Header("Other refrences")]
+    public Rigidbody rb;
+
     [Header("Variables")]
     [Range(0, 90)][Tooltip("The maximum amount of turning that the wheels can turn")]
     public float maxTurning = 5;
@@ -45,11 +58,7 @@ public class Vehicle : MonoBehaviour
     public torqueBalance balanceOfTorque;
     [Tooltip("The balance of the brakes")]
     public brakeBalance balanceOfBrakes;
-    [Tooltip("Place for the driver to sit")]
-    public Transform driverPlace;
-    [Tooltip("If true the car is driven")]
-    public bool driving;
-    public Rigidbody rb;
+    public bool isDriving;
 
     //privates
     float turning;
@@ -74,13 +83,15 @@ public class Vehicle : MonoBehaviour
 
     public void Update()
     {
-        if (!driving)
+        if (isDriving)
         {
-            return;
+            Driving();
+            Turning();
         }
-
-        Driving();
-        Turning();
+        else
+        {
+            Drag();
+        }
     }
 
     #endregion
@@ -139,11 +150,6 @@ public class Vehicle : MonoBehaviour
 
     public void Turning()
     {
-        if (!driving)
-        {
-            return;
-        }
-
         if (Input.GetAxis("Horizontal") != 0)
         {
             float steeringInput = Input.GetAxis("Horizontal");
@@ -168,6 +174,15 @@ public class Vehicle : MonoBehaviour
 
         meshLF.transform.rotation = new Quaternion(0, turning, 0, 0);
         meshRF.transform.rotation = new Quaternion(0, turning, 0, 0);
+    }
+
+    #endregion
+
+    #region drag
+
+    public void Drag()
+    {
+
     }
 
     #endregion

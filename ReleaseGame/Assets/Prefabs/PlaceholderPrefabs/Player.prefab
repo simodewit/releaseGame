@@ -953,7 +953,7 @@ GameObject:
   - component: {fileID: 2496906981581151541}
   - component: {fileID: 2646393661589521041}
   - component: {fileID: 3100113786957427017}
-  - component: {fileID: 893882819418869518}
+  - component: {fileID: 4955243660040035021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1055,7 +1055,6 @@ MonoBehaviour:
   cam: {fileID: 8165379770682450812}
   sprintSlider: {fileID: 6328173926539101408}
   inUI: 0
-  canMove: 1
 --- !u!54 &2646393661589521041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1106,7 +1105,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &893882819418869518
+--- !u!114 &4955243660040035021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1115,16 +1114,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3970933689357878875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a168f4ef2c4da14a81b1ca39dfe9f26, type: 3}
+  m_Script: {fileID: 11500000, guid: 467119f12a562864f87d70a9ba27b6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leaveOffset: {x: 0, y: 0, z: 0}
   range: 5
-  cam: {fileID: 8165379770682450812}
-  movementScript: {fileID: 2496906981581151541}
   rb: {fileID: 2646393661589521041}
   col: {fileID: 3100113786957427017}
-  panelFIcon: {fileID: 3208242482038003860}
+  movementScript: {fileID: 2496906981581151541}
+  cam: {fileID: 3691150585374762814}
 --- !u!1 &4520203324507762896
 GameObject:
   m_ObjectHideFlags: 0

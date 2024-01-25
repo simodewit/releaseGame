@@ -634,6 +634,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2054051770979578501}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3614169639727815937}
   m_SourcePrefab: {fileID: 100100000, guid: d2e98fcc1a2a2d44f97906f6992ccb34, type: 3}
 --- !u!1 &614816670184638581 stripped
 GameObject:
@@ -733,16 +737,34 @@ MonoBehaviour:
   meshRF: {fileID: 3701008586984433330}
   meshLR: {fileID: 790139399611559237}
   meshRR: {fileID: 8918575852854934801}
+  seat1: {fileID: 4608376487168282734}
+  seat2: {fileID: 8493334477661850737}
+  seat3: {fileID: 7528770205371358626}
+  seat4: {fileID: 3754863373878863945}
+  rb: {fileID: 8202971540326206740}
   maxTurning: 15
   turningStrength: 30
   snapBackStrength: 50
   topSpeed: 50
-  accelerationSpeed: 100
-  brakeForce: 100
-  torqueBalance: 1
-  driverPlace: {fileID: 4608376487168282734}
-  driving: 0
-  rb: {fileID: 8202971540326206740}
+  accelerationSpeed: 1000
+  rearAccelerationSpeed: 500
+  brakeForce: 10000
+  balanceOfTorque: 1
+  balanceOfBrakes: 1
+  isDriving: 0
+--- !u!114 &3614169639727815937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6617544216464361182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2fd98042d6b9a40b55fe7d9b8529e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &8918575852854934801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3229768999403964062, guid: d2e98fcc1a2a2d44f97906f6992ccb34,
