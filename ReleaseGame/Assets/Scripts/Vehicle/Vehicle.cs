@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour
+public class Vehicle : Interactable
 {
     #region variables
 
@@ -58,7 +58,6 @@ public class Vehicle : MonoBehaviour
     public torqueBalance balanceOfTorque;
     [Tooltip("The balance of the brakes")]
     public brakeBalance balanceOfBrakes;
-    public bool isDriving;
 
     //privates
     float turning;
@@ -83,15 +82,8 @@ public class Vehicle : MonoBehaviour
 
     public void Update()
     {
-        if (isDriving)
-        {
-            Driving();
-            Turning();
-        }
-        else
-        {
-            Drag();
-        }
+        Driving();
+        Turning();
     }
 
     #endregion
@@ -174,15 +166,6 @@ public class Vehicle : MonoBehaviour
 
         meshLF.transform.rotation = new Quaternion(0, turning, 0, 0);
         meshRF.transform.rotation = new Quaternion(0, turning, 0, 0);
-    }
-
-    #endregion
-
-    #region drag
-
-    public void Drag()
-    {
-
     }
 
     #endregion

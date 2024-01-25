@@ -1122,6 +1122,8 @@ MonoBehaviour:
   col: {fileID: 3100113786957427017}
   movementScript: {fileID: 2496906981581151541}
   cam: {fileID: 3691150585374762814}
+  holdPlace: {fileID: 6753409851851100433}
+  optionsWheel: {fileID: 4020514486345409863}
 --- !u!1 &4520203324507762896
 GameObject:
   m_ObjectHideFlags: 0

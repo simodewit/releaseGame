@@ -18,13 +18,15 @@ public class Interactor : MonoBehaviour
     [Header("Variables")]
     [Tooltip("The range that the interactor will check for a interactable")]
     public float range;
-    //public Vector3 leaveOffset;
 
     [Header("Refrences")]
     public Rigidbody rb;
     public Collider col;
     public Movement movementScript;
     public Camera cam;
+    [Tooltip("The place to hold items")]
+    public Transform holdPlace;
+    public OptionsWheel optionsWheel;
 
     //private variables
     states state;
@@ -38,6 +40,15 @@ public class Interactor : MonoBehaviour
     public void Update()
     {
         Switch();
+
+        if (state == states.notInteracting)
+        {
+            optionsWheel.enabled = true;
+        }
+        else
+        {
+            optionsWheel.enabled = false;
+        }
     }
 
     #endregion
@@ -75,7 +86,7 @@ public class Interactor : MonoBehaviour
                 return;
             }
 
-            //drop code
+            Drop(hit.transform);
         }
         else if (state == states.shop)
         {
@@ -112,7 +123,7 @@ public class Interactor : MonoBehaviour
                     //shop enter code
                     break;
                 case type.item:
-                    //pickup code
+                    Pickup(hit.transform);
                     break;
             }
         }
@@ -130,7 +141,7 @@ public class Interactor : MonoBehaviour
         movementScript.enabled = false;
         movementScript.transform.parent = car.seat1;
 
-        car.isDriving = true;
+        car.enabled = true;
         lastInteractable = car.gameObject;
 
         state = states.driving;
@@ -144,7 +155,7 @@ public class Interactor : MonoBehaviour
         movementScript.enabled = true;
         movementScript.transform.parent = null;
 
-        car.isDriving = false;
+        car.enabled = false;
         lastInteractable = null;
 
         state = states.notInteracting;
@@ -154,14 +165,25 @@ public class Interactor : MonoBehaviour
 
     #region Pickup specific
 
-    public void Pickup()
+    public void Pickup(Transform item)
     {
+        item.parent = holdPlace;
+        item.localPosition = Vector3.zero;
 
+        item.GetComponent<Collider>().enabled = false;
+        item.GetComponent<Rigidbody>().useGravity = false;
+
+        state = states.carrying;
     }
 
-    public void Drop()
+    public void Drop(Transform item)
     {
+        item.parent = null;
 
+        item.GetComponent<Collider>().enabled = true;
+        item.GetComponent<Rigidbody>().useGravity = true;
+
+        state = states.notInteracting;
     }
 
     #endregion
